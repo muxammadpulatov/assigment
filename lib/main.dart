@@ -29,7 +29,11 @@ class _OnboardingScreensState extends State<OnboardingScreens> {
         curve: Curves.easeInOut,
       );
     } else {
-      print('Get Started bosildi');
+      // Get Started tugmasi bosilganda SignIn sahifasiga o'tadi
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const SignInPage()),
+      );
     }
   }
 
@@ -93,32 +97,29 @@ class OnboardingPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Rasm
           Expanded(
             flex: 3,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Image.asset(
                 imagePath,
-                width: 418, // Rasmning eni
-                height: 343, // Rasmning bo'yi
-                fit: BoxFit.contain, // Rasmni moslashtirish uslubi
+                width: 418,
+                height: 343,
+                fit: BoxFit.contain,
               ),
             ),
           ),
-          // Matn
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Text(
               title,
               textAlign: TextAlign.left,
               style: const TextStyle(
-                fontSize: 48, // O'lchamni kattalashtirish
+                fontSize: 48,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
-          // Indikatorlar
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -127,13 +128,11 @@ class OnboardingPage extends StatelessWidget {
               _buildIndicator(2),
             ],
           ),
-          // Skip va Next tugmalari yonma-yon
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Skip tugmasi
                 ElevatedButton(
                   onPressed: () {
                     print('Skip bosildi');
@@ -143,48 +142,41 @@ class OnboardingPage extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 20.0), // Kattalashtirilgan padding
+                    padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 20.0),
                   ),
                   child: Row(
                     children: const [
                       Text(
                         'Skip',
                         style: TextStyle(
-                          fontSize: 24, // Tugma matni kattalashtirildi
+                          fontSize: 24,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(width: 20), // Tugmalar orasidagi bo'shliq
-                // Next yoki Get Started tugmasi
+                const SizedBox(width: 20),
                 ElevatedButton(
-                  onPressed: () {
-                    if (buttonText == 'Next') {
-                      onNext();
-                    } else {
-                      print('Get Started bosildi');
-                    }
-                  },
+                  onPressed: onNext,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 20.0), // Kattalashtirilgan padding
+                    padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 20.0),
                   ),
                   child: Row(
                     children: [
                       Text(
                         buttonText,
                         style: const TextStyle(
-                          fontSize: 24, // Tugma matni kattalashtirildi
+                          fontSize: 24,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       const SizedBox(width: 8),
-                      const Icon(Icons.arrow_forward, size: 24), // Ikonka kattalashtirildi
+                      const Icon(Icons.arrow_forward, size: 24),
                     ],
                   ),
                 ),
@@ -196,7 +188,6 @@ class OnboardingPage extends StatelessWidget {
     );
   }
 
-  // Indikator yaratuvchi funksiyasi
   Widget _buildIndicator(int index) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
@@ -206,6 +197,44 @@ class OnboardingPage extends StatelessWidget {
       decoration: BoxDecoration(
         color: index == 0 ? Colors.blue : Colors.grey,
         borderRadius: BorderRadius.circular(8.0),
+      ),
+    );
+  }
+}
+
+// SignIn sahifasi
+class SignInPage extends StatelessWidget {
+  const SignInPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Sign In")),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SignUpPage()),
+            );
+          },
+          child: const Text("Go to Sign Up"),
+        ),
+      ),
+    );
+  }
+}
+
+// SignUp sahifasi
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Sign Up")),
+      body: const Center(
+        child: Text("Welcome to the Sign Up Page"),
       ),
     );
   }
