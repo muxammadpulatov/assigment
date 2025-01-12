@@ -1,5 +1,3 @@
-import 'package:assigment/sign/signIn.dart';
-import 'package:assigment/sign/signUp.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,8 +13,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/signin',
       routes: {
-        '/signin': (context) => const SignInPage(),
-        '/signup': (context) => const SignUpPage(),
       },
     );
   }
